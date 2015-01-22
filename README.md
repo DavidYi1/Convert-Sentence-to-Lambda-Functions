@@ -17,3 +17,4 @@ rd_parser = nltk.RecursiveDescentParser(grammar, )
 for tree in rd_parser.parse(sent):
     print (tree)
     
+    
