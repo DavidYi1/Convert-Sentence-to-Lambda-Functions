@@ -1,0 +1,14 @@
+
+import nltk
+grammar = nltk.CFG.fromstring("""
+S -> NP VP
+NP -> expr
+VP -> variable expr
+expr -> variable expr | variable | constant | constant "and" constant |
+variable -> "Smoking" | "thrilling" | "is"
+constant -> "pot" | "cocaine" """)
+
+sent = "Smoking cocaine and pot is thrilling".split()
+rd_parser = nltk.RecursiveDescentParser(grammar)
+for tree in rd_parser.parse(sent):
+    print (tree)
