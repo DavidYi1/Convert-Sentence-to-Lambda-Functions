@@ -1,0 +1,18 @@
+%start S
+#Feature based context-free grammar
+#Base start is sentence
+S -> NP[NUM=?n] VP[NUM=?n] 
+S->  NP[NUM=?n] LV[NUM=?n] NP[NUM=?n]
+
+#Noun phrase expansion products
+NP ->  NP CC NP 
+NP[NUM=?] Ger N[num-?] 
+#Following expansion is shorthand for substantive adjective
+NP -> Adj
+
+#Lexical productions
+Ger -> 'smoking'
+N -> 'cocaine' | 'pot'
+LV -> 'is'
+Adj -> 'thrilling'
+CC -> 'and' 
