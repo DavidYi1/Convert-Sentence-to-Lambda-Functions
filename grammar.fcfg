@@ -1,0 +1,33 @@
+%start S
+#Feature based context-free grammar
+#Base start is sentence
+S[SEM=<?np(?vp)>] -> NP[NUM=?n, SEM=?np] VP[NUM=?n,SEM=?vp] 
+
+#Verb phrase expansion products
+VP[NUM=?n,SEM=?v] -> LV[NUM=?n] NP[SEM=?v]
+VP[NUM=?n,SEM=<?v(?obj)>] -> TV[NUM=?n,SEM=?v] NP[SEM=?obj]
+
+
+#Noun phrase expansion products
+NP[SEM=<?conj(?np1,?np2)>] -> NP[SEM=?np1] CC[SEM=?conj] NP[SEM=?np2]   
+NP[NUM=?n] ->  Ger N[NUM=?n]
+NP[NUM=?n, SEM=?np] -> N[NUM=?n, SEM=?np] 
+
+#Following expansion is shorthand for substantive adjective
+NP[SEM=?np] -> Adj[SEM=?np]
+
+#Lexical productions
+Ger -> 'smoking'
+N[NUM=sg, SEM=<\P.P(cocaine)>] -> 'cocaine' 
+N[NUM=sg, SEM=<\P.P(pot)>] -> 'pot'
+N[NUM=sg, SEM=<\P.P(smoking_pot)>] -> 'smoking_pot'
+N[NUM=sg, SEM=<\P.P(I)>] -> 'I'
+N[NUM=sg, SEM=<\P.P(I)>] -> 'i'
+
+TV[NUM=sg,SEM=<\X x.X(\y.smoke(x,y))>] -> 'smoke'
+
+LV[NUM=sg] -> 'is'
+LV[NUM=pl] -> 'are'
+
+Adj[SEM=<\x.thrilling(x)>] -> 'thrilling'
+CC[SEM=<\P Q R.(P(R) & Q(R))>] -> 'and' 
