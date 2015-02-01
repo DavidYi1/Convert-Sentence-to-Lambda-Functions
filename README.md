@@ -1,5 +1,6 @@
 # Convert-Sentence-to-Lambda-Functions
-The plan is to convert a sentence to a lambda function
+The plan is to convert a sentence to a lambda function.
+<br>Currently adding features into grammar for NLTK.
     
     
 
@@ -7,3 +8,5 @@ The plan is to convert a sentence to a lambda function
  - Aweseome Print
  - pyStatParser
  - NLTK
+## Features Added
+ - Number (Subject - Verb Agreement)
