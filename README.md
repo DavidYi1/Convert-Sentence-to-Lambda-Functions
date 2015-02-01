@@ -8,5 +8,6 @@ The plan is to convert a sentence to a lambda function.
  - Aweseome Print
  - pyStatParser
  - NLTK
+<br>
 ## Features Added
  - Number (Subject - Verb Agreement)
