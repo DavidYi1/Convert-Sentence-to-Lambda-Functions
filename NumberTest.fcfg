@@ -1,0 +1,18 @@
+S[NUM=?n] -> NP[NUM=?n] VP[NUM=?n]
+
+NP[NUM=?n] -> N[NUM=?n]
+
+
+
+
+VP[NUM=?n] -> V[NUM=?n] ADJ | V[NUM=?n]
+
+
+ADJ -> 'good'
+
+N[NUM=sg] -> 'Cocaine'
+N[NUM=pl] -> 'Cocaines'
+
+V[NUM=?n] -> LV[NUM=?n]
+LV[NUM=sg] -> 'is'
+LV[NUM=pl] -> 'are'
