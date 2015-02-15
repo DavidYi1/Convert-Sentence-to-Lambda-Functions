@@ -18,7 +18,7 @@ filename = 'test'
 part1 = 'cocaine is pretty_sh$% in my_opinion'
 part2 = 'you get some MMDA'
 part3 = 'MDMA is a blank_canvas' 
-part4 = 'you can do anything' 
+part4 = 'you can do anything_you_want_with_it' 
 
 parser = load_parser('grammar.fcfg')
 
