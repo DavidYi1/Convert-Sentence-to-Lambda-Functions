@@ -27,8 +27,8 @@ NP[SEM=?np] -> Adj[SEM=?np]
 #Lexical productions
 Ger -> 'smoking'
 N[NUM=sg, SEM=<\P.P(pretty_sh$%)>] -> "pretty_sh$%"
-N[NUM=sg, SEM=<\P.P(MMDA)>] -> "MDMA"
-N[NUM=sg, SEM=<\P.P(some_MMDA)>] -> "some_MDMA"
+N[NUM=sg, SEM=<\P.P(MDMA)>] -> "MDMA"
+N[NUM=sg, SEM=<\P.P(some_MDMA)>] -> "some_MDMA"
 N[NUM=sg, SEM=<\P.P(you)>] -> 'you' 
 N[NUM=sg, SEM=<\P.P(cocaine)>] -> 'cocaine' 
 N[NUM=sg, SEM=<\P.P(pot)>] -> 'pot'
