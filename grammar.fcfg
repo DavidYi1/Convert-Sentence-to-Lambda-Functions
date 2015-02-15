@@ -28,13 +28,14 @@ NP[SEM=?np] -> Adj[SEM=?np]
 Ger -> 'smoking'
 N[NUM=sg, SEM=<\P.P(pretty_sh$%)>] -> "pretty_sh$%"
 N[NUM=sg, SEM=<\P.P(MMDA)>] -> "MDMA"
+N[NUM=sg, SEM=<\P.P(some_MMDA)>] -> "some_MDMA"
 N[NUM=sg, SEM=<\P.P(you)>] -> 'you' 
 N[NUM=sg, SEM=<\P.P(cocaine)>] -> 'cocaine' 
 N[NUM=sg, SEM=<\P.P(pot)>] -> 'pot'
 N[NUM=sg, SEM=<\P.P(smoking_pot)>] -> 'smoking_pot'
 N[NUM=sg, SEM=<\P.P(I)>] -> 'I'
 N[NUM=sg, SEM=<\P.P(I)>] -> 'i'
-N[NUM=sg, SEM=<\P.P(anything)>] -> 'anything'
+N[NUM=sg, SEM=<\P.P(anything_you_want_with_it)>] -> 'anything_you_want_with_it'
 
 
 N[NUM=sg, SEM=<\P.P(blank_canvas)>] -> "blank_canvas"
@@ -42,15 +43,17 @@ N[NUM=sg] -> "my_opinion"
 
 
 TV[NUM=sg,SEM=<\X x.X(\y.smoke(x,y))>] -> 'smoke'
-TV[NUM=sg,SEM=<\x.(\y.(get(x,y)))>] -> 'get'
+TV[NUM=sg,SEM=<\x.(\y.(get(y,x)))>] -> 'get'
 TV[NUM=sg,SEM=<\x y.(do(y,x))>] -> 'do'
 
 LV[NUM=sg] -> 'is'
 LV[NUM=pl] -> 'are'
 
 ADJ[SEM=<\x.thrilling(x)>] -> 'thrilling'
+ADJ[SEM=<\X Y.(X(x) & Y(x))>] -> 'some'
 
-
+#The line below doesn't seem to work no matter what I try
+#ADJ[SEM=<\X.X(\y.some(y))>] -> 'some'
 
 
 CC[SEM=<\P Q R.(P(R) & Q(R))>] -> 'and' 
