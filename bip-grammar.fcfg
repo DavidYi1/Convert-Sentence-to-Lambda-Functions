@@ -1,0 +1,28 @@
+%start NP
+#Feature based context-free grammar
+#Base start is sentence
+
+S[NUM=?n,SEM=<?vp(?np)>] -> NP[NUM=?n, SEM=?np] VP[NUM=?n,SEM=?vp] 
+
+
+NP[NUM=?n,SEM=?np] -> N[NUM=?n, SEM=?np] 
+NP[NUM=?n, SEM=<\P.P(?np(?adj))>] -> ADJ[SEM=?adj] N[NUM=?n, SEM=?np]
+NP[NUM=?n, SEM=?np] -> ADJ[SEM=?np] 
+
+VP[NUM=?n,SEM=<?np(?vp)>] -> BV[NUM=?n, SEM=?vp] PP[SEM=?np] PP
+VP[NUM=?n,SEM=?vp] -> LV[NUM=?n] NP[SEM=?vp]
+
+PP[SEM=?np] -> Prep NP[SEM=?np]
+
+N[NUM=sg, SEM=<\P.P(1)>] -> '1'
+N[NUM=sg, SEM=<\P.P(2)>] -> '2'
+
+N[NUM=sg, SEM=<\P.P(abuse)>] -> 'abuse'
+N[NUM=pl, SEM=<\P.P(reasons)>] -> 'reasons'
+BV[NUM=sg,SEM=<\y x.agree(x,y)>] -> 'agree'
+LV[NUM=sg] -> 'is'
+
+Prep -> 'with' | 'for'
+
+ADJ[SEM=<\P.P(DXM)>] -> 'dextromethorphan'
+ADJ[SEM=<\P.P(underreported)>] -> 'underreported'
