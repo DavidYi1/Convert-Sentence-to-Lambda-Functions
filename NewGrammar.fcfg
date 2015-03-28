@@ -1,0 +1,14 @@
+%start S
+#Feature based context-free grammar
+#Base start is sentence
+S[NUM=?num, SEM=<?subj(?vp)>] -> NP[NUM=?num, SEM=?subj] VP[NUM=?num, SEM=?vp] 
+
+NP[NUM=sg, SEM=<\P.P(I)>] -> 'I'
+NP[NUM=?num, SEM=<?det(?n)>] -> Det[NUM=?num, SEM=?det] N[NUM=?num, SEM=?n]
+
+N[NUM=sg, SEM=<\x.race(x)>] -> 'race'
+TV[NUM=sg, SEM=<\X.\y.X(\x.run(y,x))>] -> 'run'
+VP[NUM=?num, SEM=<?tv(?obj)>] -> TV[NUM=?num, SEM=?tv] NP[NUM=?num, SEM=?obj]
+
+
+Det[NUM=sg, SEM=<\P.\Q.exists x.(P(x) & Q(x))>] -> 'a'
