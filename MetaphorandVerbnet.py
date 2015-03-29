@@ -12,12 +12,29 @@ for tree in parser.parse(metaphor1.split()):
 print(lambdaexpression)
 
 parsed = lambdaexpression
+predicates_from_parsed =[]
+verbs=[]
 for p in parsed.predicates():
     print(p)
-    
-text = word_tokenize(metaphor1)
-tag = nltk.pos_tag(text)
-print(tag)
-for word in tag:
-    if word[1] == 'VBP':
-        print (word[0])
+    swag.append(p) ##These are in the for of Variable(x). Can't figure out of a way to get rid of them. 
+    ##No way to check if verbs found by POS is the same as the predicates until I figure out. 
+for word,pos in nltk.pos_tag(nltk.word_tokenize(metaphor1)):
+    initial = metaphor1.split
+    if 'V' in pos: #Another way to focus on only verbs
+            verbs.append(word)
+print (verbs)
+
+for word,pos in nltk.pos_tag(nltk.word_tokenize(metaphor1)):
+    if "N" in pos:
+        pos = "n"
+    if "V" in pos:
+        pos = "v"
+    print (lesk(metaphor1, word, pos))## Trying to use for sense identification
+
+for word in verbs:
+    final = [sense for sense in vn.classids(word)]
+    print (final)
+    for sense in final:
+        print(vn.pprint_themroles(sense)) ## Compare with all the given senses. 
+
+
