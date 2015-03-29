@@ -38,3 +38,4 @@ for word in verbs:
         print(vn.pprint_themroles(sense)) ## Compare with all the given senses. 
 
 
+
