@@ -11,7 +11,9 @@ for tree in parser.parse(metaphor1.split()):
     lambdaexpression = (tree.label()['SEM'])
 print(lambdaexpression)
 
+
 parsed = lambdaexpression
+swag = []
 predicates_from_parsed =[]
 verbs=[]
 for p in parsed.predicates():
