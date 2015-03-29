@@ -3,6 +3,9 @@ from nltk.draw.util import CanvasFrame
 from nltk.draw import TreeWidget
 from nltk import Tree, word_tokenize,load_parser
 from nltk.corpus import verbnet as vn
+from nltk.corpus import wordnet as wn
+from nltk.corpus import verbnet 
+from nltk.wsd import lesk
 
 metaphor1 = " I run a race" 
 metaphor2 = " I run an errand" 
@@ -12,12 +15,11 @@ for tree in parser.parse(metaphor1.split()):
 print(lambdaexpression)
 
 parsed = lambdaexpression
-predicates_from_parsed =[]
+swag =[]
 verbs=[]
 for p in parsed.predicates():
     print(p)
-    swag.append(p) ##These are in the for of Variable(x). Can't figure out of a way to get rid of them. 
-    ##No way to check if verbs found by POS is the same as the predicates until I figure out. 
+    swag.append(p)
 for word,pos in nltk.pos_tag(nltk.word_tokenize(metaphor1)):
     initial = metaphor1.split
     if 'V' in pos: #Another way to focus on only verbs
@@ -36,6 +38,3 @@ for word in verbs:
     print (final)
     for sense in final:
         print(vn.pprint_themroles(sense)) ## Compare with all the given senses. 
-
-
-
