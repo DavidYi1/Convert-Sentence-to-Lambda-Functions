@@ -28,7 +28,9 @@ for word,pos in nltk.pos_tag(nltk.word_tokenize(metaphor1)):
             verbs.append(word)
 print (verbs)
 
+
 for word,pos in nltk.pos_tag(nltk.word_tokenize(metaphor1)):
+    print word,'\t', 
     if "N" in pos:
         pos = "n"
     if "V" in pos:
