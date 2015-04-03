@@ -40,5 +40,11 @@ for word,pos in nltk.pos_tag(nltk.word_tokenize(metaphor1)):
 for word in verbs:
     final = [sense for sense in vn.classids(word)]
     print (final)
-    for sense in final:
-        print(vn.pprint_themroles(sense)) ## Compare with all the given senses. 
+    
+run_senses = {'meander-47.7': 'figurative', 
+'preparing-26.3-1':'figurative',
+'run-51.3.2': 'literal',
+'swarm-47.5.1-1': 'figurative'
+}
+for x in final:
+    print(run_senses[x])
