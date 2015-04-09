@@ -99,4 +99,22 @@ for x in nltk.word_tokenize(metaphor1):
 	print (fn.lus(r'(?i)%s'%(x)))
 print (fn.lus('race'))
 '''
-print isFigurativeLanguage(metaphor1)
+
+print(fn.frames_by_lemma(r'(?i)run'))
+print(fn.frames_by_lemma(r'(?i)race'))
+
+run_frames = (fn.frames_by_lemma(r'(?i)run'))
+race_frames = (fn.frames_by_lemma(r'(?i)race'))
+
+for frame1 in run_frames:
+    for frame2 in race_frames:
+        if frame1==frame2:
+            print ("Progress")
+            #attempting to see if frames of the two have any correlation
+    
+##print (fn.fes('Noise_maker'))
+##Has error AttributeError: 'FramenetCorpusReader' object has no attribute 'fes'
+
+print (fn.lu_ids_and_names("run"))
+print (fn.lu_ids_and_names("race")) #use to determine which LU to use
+>>>>>>> upstream/master
