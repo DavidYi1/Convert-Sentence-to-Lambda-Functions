@@ -8,7 +8,9 @@ data_file = open('twitter.json')
 data = json.load(data_file)
 ##Json file with all the ckey, csecret, atoken, and asecret
 pprint(data)
-common_names_for_marijuana = ["Marijuana", "Marihuana", "pot", "weed", ]
+
+
+common_names_for_marijuana = ["Marijuana", "Marihuana", "pot", "weed"]
 #consumer key, consumer secret, access token, access secret.
 ckey = data["ckey"]
 csecret = data["csecret"]
@@ -32,4 +34,8 @@ auth = OAuthHandler(ckey, csecret)
 auth.set_access_token(atoken, asecret)
 
 twitterStream = Stream(auth, listener())
-print(twitterStream.filter(track=["weed"]))
+
+drugstream = twitterStream.filter(track=common_names_for_marijuana)
+##drugtweets = open("drugtweets.txt","w")
+##for tweet in drugstream:
+##    drugtweets.write(tweet)
