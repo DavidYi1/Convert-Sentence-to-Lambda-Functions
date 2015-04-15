@@ -2,13 +2,20 @@ from tweepy import Stream
 from tweepy import OAuthHandler
 from tweepy.streaming import StreamListener
 import json 
+from pprint import pprint
+
+data_file = open('twitter.json')  
+data = json.load(data_file)
+##Json file with all the ckey, csecret, atoken, and asecret
+pprint(data)
 
 
+common_names_for_marijuana = ["Marijuana", "Marihuana", "pot", "weed"]
 #consumer key, consumer secret, access token, access secret.
-ckey="XbVzBf820RxReoxMtpe39FpuZ"
-csecret="7G5jeyow2znuBvH3PDY2GnInjMl1T3z5uymCrOSxmDygDqnPdD"
-atoken="378750618-gAnqXjTEfn5kPYyHMDSQxHE2apd1O8pR8qlbe5Yu"
-asecret="gE12ID1pHOemqtONwNj5Dho6V9tDongeFW1GEZ2aDVmyT"
+ckey = data["ckey"]
+csecret = data["csecret"]
+atoken = data["atoken"]
+asecret = data["asecret"]
 
 class listener(StreamListener):
 
@@ -27,4 +34,8 @@ auth = OAuthHandler(ckey, csecret)
 auth.set_access_token(atoken, asecret)
 
 twitterStream = Stream(auth, listener())
-print(twitterStream.filter(track=["weed"]))
+
+drugstream = twitterStream.filter(track=common_names_for_marijuana)
+##drugtweets = open("drugtweets.txt","w")
+##for tweet in drugstream:
+##    drugtweets.write(tweet)
