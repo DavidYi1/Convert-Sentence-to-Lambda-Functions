@@ -1,3 +1,8 @@
+'''
+
+    python CaseControlStream.py --ktJSON_KEY_FILE --k KEYWORDFILE --o DIR_TO_PIPE_TWEETS -m MAX_NUM_TWEET [OPTIONAL]
+
+'''
 import json,os,twitter, dropbox, gzip
 
 from datetime import datetime
