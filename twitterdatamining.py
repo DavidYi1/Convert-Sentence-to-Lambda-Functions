@@ -25,6 +25,7 @@ class listener(StreamListener):
         #We'll need this later.
         self.path = path
         self.x_count = 1
+    
     def on_data(self, data):
         all_data = json.loads(data)       
         tweet = all_data["text"]        
