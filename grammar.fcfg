@@ -3,15 +3,22 @@
 #Base start is sentence
 
 S[SEM=<?vp(?np)>] -> NP[NUM=?n, SEM=?np] VP[NUM=?n,SEM=?vp] 
+S[SEM=<?np(?vp)>] -> NP[NUM=?n, SEM=?np] VP[NUM=?n,SEM=?vp] 
 
 
 #Verb phrase expansion products
 VP[NUM=?n,SEM=?v] -> LV[NUM=?n] NP[SEM=?v]
-VP[NUM=?n,SEM=?v] -> LV[NUM=?n] DET NP[SEM=?v]
+VP[NUM=?n,SEM=?v] -> LV[NUM=?n] Det NP[SEM=?v]
 VP[NUM=?n,SEM=?v] -> LV[NUM=?n] NP[SEM=?v] PP
 VP[NUM=?n,SEM=<?v(?obj)>] -> TV[NUM=?n,SEM=?v] NP[SEM=?obj]
 VP[NUM=?n,SEM=<?v(?obj)>] -> ADV TV[NUM=?n,SEM=?v] NP[SEM=?obj]
+<<<<<<< HEAD
+NP[NUM=?n,SEM=<?det(?nom)> ] -> Det[NUM=?n,SEM=?det]  N[NUM=?n,SEM=?nom]
+
+Det[SEM=<\P Q.(P(x) & Q(x))>] -> 'some'
+=======
 VP[NUM=?n,SEM=<?v(?obj)>] -> TV[NUM=?n,SEM=?v] DET NP[SEM=?obj]
+>>>>>>> upstream/master
 
 #Noun phrase expansion products
 
@@ -28,9 +35,14 @@ NP[SEM=?np] -> Adj[SEM=?np]
 
 #Lexical productions
 Ger -> 'smoking'
+N[NUM=sg, SEM=<\P.P(1)>] -> '1'
+N[NUM=sg, SEM=<\P.P(2)>] -> '2'
 N[NUM=sg, SEM=<\P.P(pretty_sh$%)>] -> "pretty_sh$%"
 N[NUM=sg, SEM=<\x.MDMA(x)>] -> "MDMA"
+<<<<<<< HEAD
+=======
 
+>>>>>>> upstream/master
 N[NUM=sg, SEM=<\P.P(you)>] -> 'you' 
 N[NUM=sg, SEM=<\P.P(cocaine)>] -> 'cocaine' 
 N[NUM=sg, SEM=<\P.P(pot)>] -> 'pot'
@@ -44,22 +56,18 @@ N[NUM=sg, SEM=<\P.P(errand)>] -> 'errand'
 N[NUM=sg, SEM=<\P.P(blank_canvas)>] -> "blank_canvas"
 N[NUM=sg] -> "my_opinion" 
 
-
 TV[NUM=sg,SEM=<\X x.X(\y.smoke(x,y))>] -> 'smoke'
 TV[NUM=sg,SEM=<\X x.X(\y.get(x,y))>] -> 'get'
 TV[NUM=sg,SEM=<\x y.(do(y,x))>] -> 'do'
+TV[NUM=sg,SEM=<\X x.X(\y.agree_with(x,y))>] -> 'agree_with'
 TV[NUM=sg,SEM=<\x y.(run(y,x))>] -> 'run'
 
 LV[NUM=sg] -> 'is'
 LV[NUM=pl] -> 'are'
 
 ADJ[SEM=<\x.thrilling(x)>] -> 'thrilling'
-
-
 #The line below doesn't seem to work no matter what I try
 #ADJ[SEM=<\X.X(\y.some(y))>] -> 'some'
-
-
 CC[SEM=<\P Q R.(P(R) & Q(R))>] -> 'and' 
 
 PP -> P N[NUM=sg]
