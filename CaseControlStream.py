@@ -3,7 +3,7 @@
     python CaseControlStream.py --tJSON_KEY_FILE --k KEYWORDFILE --o DIR_TO_PIPE_TWEETS -m MAX_NUM_TWEET [OPTIONAL]
 
 '''
-import json,os,twitter, dropbox, gzip
+import json,os,twitter,json,dropbox, gzip
 
 from datetime import datetime
 from tweepy import Stream
@@ -19,6 +19,7 @@ op.add_option('--t', dest='keys', type='str', help='Path of key files')
 op.add_option('--k', dest='keywords',type='str',help='Path of keywords')
 op.add_option('--o',type="str", dest="outpath")
 op.add_option('--m',type='int',dest="MAX_NUMBER_OF_TWEETS",default=100)
+op.add_option('--f',type="int", dest="filetype")
 op.print_help()
 
 opts,args = op.parse_args()
@@ -51,7 +52,7 @@ if not opts.keywords:
 else:
     search_terms = open(opts.keywords).read().splitlines() #Assuming one word per line
 
-client= dropbox.client.DropboxClient(opts.keys['dropbox']['access_token'])
+
 class listener(StreamListener):
     
     def __init__(self, api=None, path=None,outname='output',MAX_NUMBER_OF_TWEETS=100,TWEETS_PER_FILE=10,progress_bar=None):
@@ -71,12 +72,21 @@ class listener(StreamListener):
         #tweet = all_data["text"]        
         #username = all_data["user"]["screen_name"]
         filename = os.path.join(self.path,'%s_%s'%(self.outname,datetime.now().strftime('%Y-%m-%d-%H-%M')))
-        with gzip.open(filename,"a") as fid: #This open and closes the same file a lot of times. Hack for now. 
-            print>>fid,all_data
-            self.count += 1 
-            if self.progress_bar:
-                self.progress_bar.next()
-
+        
+        with open(filename,"a") as fid: #This open and closes the same file a lot of times. Hack for now. 
+            if opts.filetype == 1:           ##working on fixing the for either a json file, a txt file or both
+                print>>fid,all_data["text"], all_data["user"]["screen_name"]
+                self.count += 1 
+                if self.progress_bar:
+                    self.progress_bar.next()
+            if opts.filetype == 2:
+                with open(filename,"a") as fid: #This open and closes the same file a lot of times. Hack for now. 
+                    print>>fid,all_data
+                    self.count += 1 
+                    if self.progress_bar:
+                        self.progress_bar.next()
+            if opts.filetype < 1 or opts.filetype > 3:
+                return
         if self.count < self.MAX_NUMBER_OF_TWEETS:
             return True
         else:
@@ -104,7 +114,7 @@ counter = 0
 
 for tweet in iterator:
     filename = os.path.join(control_path,'control_%d'%(counter/TWEETS_PER_FILE))
-    with gzip.open(filename,'a') as fid:
+    with open(filename,'a') as fid:
         print>>fid,tweet
         counter += 1
         bar.next()
