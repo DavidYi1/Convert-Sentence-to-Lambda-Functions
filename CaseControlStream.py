@@ -1,6 +1,6 @@
 '''
 
-    python CaseControlStream.py --tJSON_KEY_FILE --k KEYWORDFILE --o DIR_TO_PIPE_TWEETS -m MAX_NUM_TWEET [OPTIONAL]
+    python CaseControlStream.py --tJSON_KEY_FILE --k KEYWORDFILE --o DIR_TO_PIPE_TWEETS -m MAX_NUM_TWEET [OPTIONAL] --f Number y
 
 '''
 import json,os,twitter,json,dropbox, gzip
@@ -71,7 +71,7 @@ class listener(StreamListener):
         all_data = json.loads(data)       
         #tweet = all_data["text"]        
         #username = all_data["user"]["screen_name"]
-        filename = os.path.join(self.path,'%s_%s'%(self.outname,datetime.now().strftime('%Y-%m-%d-%H-%M')))
+        filename = os.path.join(self.path,'%s_%s'%(self.outname,datetime.now().strftime('%Y-%m-%d-%H-%M.json')))
         
         with open(filename,"a") as fid: #This open and closes the same file a lot of times. Hack for now. 
             if opts.filetype == 1:           ##working on fixing the for either a json file, a txt file or both
@@ -113,7 +113,7 @@ iterator = control_stream.statuses.sample()
 counter = 0
 
 for tweet in iterator:
-    filename = os.path.join(control_path,'control_%d'%(counter/TWEETS_PER_FILE))
+    filename = os.path.join(control_path,'control_%d.json'%(counter/TWEETS_PER_FILE))
     with open(filename,'a') as fid:
         print>>fid,tweet
         counter += 1
