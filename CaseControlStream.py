@@ -68,31 +68,23 @@ class listener(StreamListener):
         self.TWEETS_PER_FILE = TWEETS_PER_FILE
 
     def on_data(self, data):
-        all_data = json.loads(data)       
         #tweet = all_data["text"]        
         #username = all_data["user"]["screen_name"]
-        filename = os.path.join(self.path,'%s_%s'%(self.outname,datetime.now().strftime('%Y-%m-%d-%H-%M.json')))
+        filename = os.path.join(self.path,'%s_%s.json'%(self.outname,datetime.now().strftime('%Y-%m-%d-%H')))
         
         with open(filename,"a") as fid: #This open and closes the same file a lot of times. Hack for now. 
-            if opts.filetype == 1:           ##working on fixing the for either a json file, a txt file or both
-                print>>fid,all_data["text"], all_data["user"]["screen_name"]
-                self.count += 1 
-                if self.progress_bar:
-                    self.progress_bar.next()
-            if opts.filetype == 2:
-                with open(filename,"a") as fid: #This open and closes the same file a lot of times. Hack for now. 
-                    print>>fid,all_data
-                    self.count += 1 
-                    if self.progress_bar:
-                        self.progress_bar.next()
-            if opts.filetype < 1 or opts.filetype > 3:
-                return
+            print>>fid, data
+            self.count += 1 
+            if self.progress_bar:
+                self.progress_bar.next()
+
         if self.count < self.MAX_NUMBER_OF_TWEETS:
             return True
         else:
             if self.progress_bar:
                 self.progress_bar.finish()
             return False
+
 
     def on_error(self, status):
         return True #I believe this functions like pass in a try-except blocks
@@ -113,14 +105,14 @@ iterator = control_stream.statuses.sample()
 counter = 0
 
 for tweet in iterator:
-    filename = os.path.join(control_path,'control_%d.json'%(counter/TWEETS_PER_FILE))
-    with open(filename,'a') as fid:
-        print>>fid,tweet
-        counter += 1
-        bar.next()
+    if tweet and 'delete' not in tweet:
+            json.dump(json.loads(json.dumps(tweet)),open(os.path.join(control_path,'control-%s-%d.json'%(tweet['id_str'],counter/TWEETS_PER_FILE)),'wb'))
+    counter+=1
+    bar.next()
     if counter > opts.MAX_NUMBER_OF_TWEETS:
         break
 bar.finish()
+
 
 try:
     bar = Bar('Acquiring case tweets', max=opts.MAX_NUMBER_OF_TWEETS)
