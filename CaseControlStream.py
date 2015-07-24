@@ -70,10 +70,17 @@ class listener(StreamListener):
     def on_data(self, data):
         #tweet = all_data["text"]        
         #username = all_data["user"]["screen_name"]
+<<<<<<< HEAD
         filename = os.path.join(self.path,'%s_%s.json'%(self.outname,datetime.now().strftime('%Y-%m-%d-%H')))
 
         with open(filename,"a") as fid: #This open and closes the same file a lot of times. Hack for now.
             print>>fid, data + ","
+=======
+        filename = os.path.join(self.path,'%s_%s'%(self.outname,datetime.now().strftime('%Y-%m-%d-%H')))
+
+        with open(filename,"a") as fid: #This open and closes the same file a lot of times. Hack for now.
+            print>>fid,data
+>>>>>>> origin/master
             self.count += 1 
             if self.progress_bar:
                 self.progress_bar.next()
